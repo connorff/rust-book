@@ -40,3 +40,6 @@ JSON
 serializer/S
 instantiation/S
 monomorphize
+funders
+DARPA
+SIGPLAN
