@@ -37,7 +37,7 @@ let ConsentForm = () => {
                   sections need improvement.
                 </li>
                 <li>
-                  <strong>Some explanations will be changed.</strong> For instance, we will
+                  <strong>Some chapters will be changed or replaced.</strong> For instance, we will
                   experiment with modifying some of the text, including replacing it with
                   visualizations.
                 </li>

@@ -55,11 +55,11 @@ _Interested in participating in other experiments about making Rust easier to le
 Thus far, this experiment has led to two open-access publications. Check them out if you're interested to see the academic research behind this book:
 
 * [Profiling Programming Language Learning](https://dl.acm.org/doi/10.1145/3649812) <br />
-  Will Crichton and Shriram Krishnamurthi. OOPSLA 2024. (Distinguished Paper!)
+  Will Crichton and Shriram Krishnamurthi. OOPSLA 2024. (Distinguished Paper.)
 
 * [A Grounded Conceptual Model for Ownership Types in Rust](https://dl.acm.org/doi/10.1145/3622841) <br />
-  Will Crichton, Gavin Gray, and Shriram Krishnamurthi. OOPSLA 2023.
+  Will Crichton, Gavin Gray, and Shriram Krishnamurthi. OOPSLA 2023. (SIGPLAN Research Highlight and Communications of the ACM Research Highlight.)
 
 ## 5. Acknowledgments
 
-Niko Matsakis and Amazon Web Services provided funding for this experiment. Carol Nichols and the Rust Foundation helped publicize the experiment. TRPL is the product of many people's hard work before we started this experiment.
+This work was partially supported by the DARPA under Agreement No.\@ HR00112420354, partially supported by the NSF under Award No.\@ CCF-2227863, and partially supported by Amazon Web Services. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the authors and do not reflect the views of our funders. Carol Nichols and the Rust Foundation helped publicize the experiment. TRPL is the product of many people's hard work before we started this experiment.
