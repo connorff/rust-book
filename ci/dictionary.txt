@@ -681,3 +681,6 @@ zerocopy
 byteorder
 unicode
 Krycho
+funders
+DARPA
+SIGPLAN
