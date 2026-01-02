@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ownership Inventory #1 - The Rust Programming Language</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
+        <link rel="stylesheet" href="theme/2018-edition.css">
+        <link rel="stylesheet" href="js-extensions/packages/consent-form/dist/index.css">
+        <link rel="stylesheet" href="js-extensions/packages/feedback/dist/index.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Rust Programming Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/cognitive-engineering-lab/rust-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="ownership-inventory-1"><a class="header" href="#ownership-inventory-1">Ownership Inventory #1</a></h2>
+<p>The Ownership Inventory is a series of quizzes that check your understanding of ownership in real-world scenarios. These scenarios are inspired by common StackOverflow questions about Rust. You can use these questions to test how well you understand ownership so far.</p>
+<h3 id="a-new-technology-the-in-browser-ide"><a class="header" href="#a-new-technology-the-in-browser-ide">A new technology: the in-browser IDE</a></h3>
+<p>These questions will involve Rust programs which use functions you haven’t seen before. Therefore we will use an experimental technology that supports IDE features in the browser. The IDE lets you get information about unfamiliar functions and types. For example, try doing the following actions in the program below:</p>
+<ul>
+<li>Hover your mouse over <code>replace</code> to see its type and description.</li>
+<li>Hover your mouse over <code>s2</code> to see its inferred type.</li>
+</ul>
+<hr />
+<pre>
+<code class="ide">
+/// Turns a string into a far more exciting string
+fn make_exciting(s: &str) -> String {
+  let s2 = s.replace(".", "!");
+  let s3 = s2.replace("?", "‽");
+  s3
+}
+</code>
+</pre>
+<hr />
+<p>A few important caveats about this experimental technology:</p>
+<p><strong>PLATFORM COMPATIBILITY:</strong> the in-browser IDE does not work on touch-screens. The in-browser IDE has only been tested to work on Google Chrome 109 and Firefox 107. It might not work in older versions of Safari.</p>
+<p><strong>MEMORY USAGE:</strong> the in-browser IDE uses a <a href="https://rustwasm.github.io/book/">WebAssembly</a> build of <a href="https://github.com/rust-lang/rust-analyzer">rust-analyzer</a>, which can take up a fair amount of memory. Each instance of the IDE appears to take around ~300 MB. (Note: we have also received some reports of &gt;10GB memory usage.)</p>
+<p><strong>SCROLLING:</strong> the in-browser IDE will “eat” your cursor if your cursor intersects with the editor while scrolling. If you’re having trouble scrolling the page, try moving your cursor onto the rightmost scrollbar.</p>
+<p><strong>LOAD TIMES:</strong> the IDE may take up to 15 seconds to initialize for a new program. It will say “Loading…” as you interact with code in the editor.</p>
+<h3 id="the-quiz"><a class="header" href="#the-quiz">The Quiz</a></h3>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch06-04-inventory&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;Because `default` lives on the stack within `make_separator`, it will be deallocated once a call to `make_separator` ends.\nThis leaves `&amp;default` pointing to deallocated memory. Rust therefore complains that you cannot return a reference to a local variable.\n&quot;,&quot;id&quot;:&quot;6e5e193e-579d-4a46-aae4-d35336b77b68&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;cannot return reference to local variable `default`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;`user_str` does not live long enough&quot;,&quot;function `make_separator` cannot return a reference of type `&amp;str`&quot;,&quot;function `make_separator` cannot return two different references&quot;],&quot;prompt&quot;:&quot;**Program 1:**\n\n```ide\n/// Makes a string to separate lines of text, \n/// returning a default if the provided string is blank\nfn make_separator(user_str: &amp;str) -&gt; &amp;str {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        &amp;default\n    } else {\n        user_str\n    }\n}\n```\n\nIf you tried to compile this function, which of the following best describes the compiler error you would get?\n&quot;}},{&quot;context&quot;:&quot;The caller must pass an empty string to trigger the problematic if-condition. This returns a dangling pointer.\n&quot;,&quot;id&quot;:&quot;44a2eb01-b49a-497b-a9d2-207814d1db1e&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:[&quot;```\nlet s = make_separator(\&quot;\&quot;);\nprintln!(\&quot;{s}\&quot;);\n```\n&quot;]},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```\nprintln!(\&quot;{}\&quot;, make_separator(\&quot;Hello world!\&quot;));\n```\n&quot;,&quot;None of these programs&quot;],&quot;prompt&quot;:&quot;**Program 1:**\n\n```ide\n/// Makes a string to separate lines of text, \n/// returning a default if the provided string is blank\nfn make_separator(user_str: &amp;str) -&gt; &amp;str {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        &amp;default\n    } else {\n        user_str\n    }\n}\n```\n\nNormally if you try to compile this function, the compiler returns the following error:\n\n```text\nerror[E0515]: cannot return reference to local variable `default`\n --&gt; test.rs:6:9\n  |\n6 |         &amp;default\n  |         ^^^^^^^^ returns a reference to data owned by the current function\n```\n\nAssume that the compiler did NOT reject this function. Which (if any) of the following programs would\n(1) pass the compiler, and (2) possibly cause undefined behavior if executed?\nCheck each program that satisfies both criteria, OR check \&quot;None of these programs\&quot; if none are satisfying.\n&quot;}},{&quot;context&quot;:&quot;There is no valid way to return a pointer to a stack-allocated variable. The simple solution is therefore to change the return type to `String`\nand copy the input `user_str` into an owned string. However, requiring `user_str` to be a `String` would reduce the flexibility of the API, e.g.\na caller could not call `make_separator` on a substring of a bigger string. It would also require callers to heap-allocate strings, e.g.\nthey could not use a string literal like `make_separator(\&quot;Rust\&quot;)`.\n\nThe most idiomatic solution to this problem uses a construct you haven't seen yet: [`Cow`](https://doc.rust-lang.org/std/borrow/enum.Cow.html).\nThe clone-on-write smart pointer would enable this function to return *either* an owned string *or* a string reference without a type error.\n&quot;,&quot;id&quot;:&quot;815ae4cd-0f23-4da5-9dc2-0e81c664cc28&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```ide\nfn make_separator(user_str: &amp;str) -&gt; `[String]` {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        `[default]`\n    } else {\n        `[user_str.to_string()]`        \n    }\n}\n```\n&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```ide\nfn make_separator(user_str: &amp;str) -&gt; &amp;str {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        &amp;default\n    } else {\n        `[&amp;user_str]`\n    }\n}\n```\n&quot;,&quot;```ide\nfn make_separator(user_str: `[String]`) -&gt; `[String]` {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        `[default]`\n    } else {\n        user_str\n    }\n}\n```\n&quot;],&quot;prompt&quot;:&quot;**Program 1:**\n\n```ide\n/// Makes a string to separate lines of text, \n/// returning a default if the provided string is blank\nfn make_separator(user_str: &amp;str) -&gt; &amp;str {\n    if user_str == \&quot;\&quot; {\n        let default = \&quot;=\&quot;.repeat(10);\n        &amp;default\n    } else {\n        user_str\n    }\n}\n```\n\nOf the following fixes (highlighted in yellow), which fix best satisfies these three criteria:\n1. The fixed function passes the Rust compiler,\n2. The fixed function preserves the intention of the original code, and\n3. The fixed function does not introduce unnecessary inefficiencies\n&quot;}},{&quot;context&quot;:&quot;The function `Option::unwrap` expects `self`, meaning it expects ownership of `arg`. However `arg` is an immutable\nreference to an option, so it cannot provide ownership of the option. Therefore the compiler complains that we \ncannot move out of `arg` via `unwrap`.\n&quot;,&quot;id&quot;:&quot;1f4e5c06-ecdf-481d-9cae-8a25dafe9cfd&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;cannot move out of `arg` in `arg.unwrap()`&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;cannot call `arg.is_none()` without dereferencing `arg`&quot;,&quot;`arg` does not live long enough&quot;,&quot;cannot return `s.clone()` which does not live long enough&quot;],&quot;prompt&quot;:&quot;**Program 2:**\n\n```ide\n/// Gets the string out of an option if it exists,\n/// returning a default otherwise\nfn get_or_default(arg: &amp;Option&lt;String&gt;) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg.unwrap();\n    s.clone()\n}\n```\n\nIf you tried to compile this function, which of the following best describes the compiler error you would get?\n&quot;}},{&quot;context&quot;:&quot;All of these programs violate memory safety due to a double-free. If `arg.unwrap()` were permitted, then\nownership of the string `String::from(\&quot;Rust\&quot;)` would be assumed by `s`. After `get_or_default` returns,\nthen the string would be freed. However, `opt` also believes it owns the string, so \nthe string would be freed a second time on behalf of `opt`.\n&quot;,&quot;id&quot;:&quot;989670b2-b038-47c4-9975-a93d6ee193e5&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:[&quot;```\nlet opt = Some(String::from(\&quot;Rust\&quot;));\nget_or_default(&amp;opt);\nprintln!(\&quot;{:?}\&quot;, opt);\n```\n&quot;,&quot;```\nlet opt = Some(String::from(\&quot;Rust\&quot;));\nlet s = get_or_default(&amp;opt);\nprintln!(\&quot;{}\&quot;, s);\n```\n&quot;,&quot;```\nlet opt = Some(String::from(\&quot;Rust\&quot;));\nget_or_default(&amp;opt);\n```\n&quot;]},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;None of these programs&quot;],&quot;prompt&quot;:&quot;**Program 2:**\n\n```ide\n/// Gets the string out of an option if it exists,\n/// returning a default otherwise\nfn get_or_default(arg: &amp;Option&lt;String&gt;) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg.unwrap();\n    s.clone()\n}\n```\n\nNormally if you try to compile this function, the compiler returns the following error:\n\n```text\nerror[E0507]: cannot move out of `*arg` which is behind a shared reference\n   --&gt; test.rs:7:13\n    |\n7   |     let s = arg.unwrap();\n    |             ^^^^--------\n    |             |   |\n    |             |   `*arg` moved due to this method call\n    |             help: consider calling `.as_ref()` or `.as_mut()` to borrow the type's contents\n    |             move occurs because `*arg` has type `Option&lt;String&gt;`, which does not implement the `Copy` trait\n```\n\nAssume that the compiler did NOT reject this function. Which (if any) of the following programs would\n(1) pass the compiler, and (2) possibly cause undefined behavior if executed?\nCheck each program that satisfies both criteria, OR check \&quot;None of these programs\&quot; if none are satisfying.\n&quot;}},{&quot;context&quot;:&quot;The combination of `is_none` and `unwrap` here is a Rust anti-pattern, since a `match` combines the two functionalities and\nautomatically deals with pushing the reference `&amp;Option` into the interior to produce `&amp;String`. Therefore the `match` solution\nis the most idiomatic, and passes the compiler without changing the intended type signature of the function.\n\nThe solution of changing `&amp;Option` to `Option` is not desirable because it requires the caller to provide ownership of their option,\nwhich is a far more restrictive API.\n&quot;,&quot;id&quot;:&quot;3a8d5bb8-a204-43e6-b50a-d17c803dbe37&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;```ide\nfn get_or_default(arg: &amp;Option&lt;String&gt;) -&gt; String {\n    `[match arg {]`\n        `[None =&gt; String::new(),]`\n        `[Some(s) =&gt; s.clone()]`\n    `[}]`\n}\n```\n&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;```ide\nfn get_or_default(arg: `[&amp;mut Option&lt;String&gt;]`) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg`[.as_mut()]`.unwrap();\n    s.clone()\n}\n```\n&quot;,&quot;```ide\nfn get_or_default(arg: `[Option&lt;String&gt;]`) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg.unwrap();\n    s.clone()\n}\n```\n&quot;,&quot;```ide\nfn get_or_default(arg: &amp;Option&lt;`[&amp;str]`&gt;) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg.unwrap();\n    `[s.to_string()]`\n}\n```\n&quot;],&quot;prompt&quot;:&quot;**Program 2:**\n\n```ide\n/// Gets the string out of an option if it exists,\n/// returning a default otherwise\nfn get_or_default(arg: &amp;Option&lt;String&gt;) -&gt; String {\n    if arg.is_none() {\n        return String::new();\n    }\n    let s = arg.unwrap();\n    s.clone()\n}\n```\n\nOf the following fixes (highlighted in yellow), which fix best satisfies these three criteria:\n1. The fixed function passes the Rust compiler,\n2. The fixed function preserves the intention of the original code, and\n3. The fixed function does not introduce unnecessary inefficiencies\n&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
+<script type="text/javascript" src="quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz/style.css">
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch06-03-if-let.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch06-03-if-let.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="ferris.js"></script>
+        <script src="js-extensions/packages/telemetry/dist/index.js"></script>
+        <script src="js-extensions/packages/consent-form/dist/index.js"></script>
+        <script src="js-extensions/packages/feedback/dist/index.js"></script>
+
+
+    </div>
+    </body>
+</html>

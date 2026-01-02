@@ -1,14 +1,16 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Control Flow - The Rust Programming Language</title>
+
+
         <!-- Custom HTML head -->
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -16,32 +18,52 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
         <link rel="stylesheet" href="css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="ferris.css">
+        <link rel="stylesheet" href="theme/semantic-notes.css">
+        <link rel="stylesheet" href="theme/listing.css">
         <link rel="stylesheet" href="theme/2018-edition.css">
         <link rel="stylesheet" href="js-extensions/packages/consent-form/dist/index.css">
         <link rel="stylesheet" href="js-extensions/packages/feedback/dist/index.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
     </head>
     <body>
-        <!-- Provide site root to javascript -->
-        <script type="text/javascript">
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -54,56 +76,66 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
-            var theme;
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
 
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
+            sidebar_toggle.checked = sidebar === 'visible';
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="experiment-intro.html">Experiment Introduction</a></li><li class="chapter-item expanded affix "><a href="title-page.html">The Rust Programming Language</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Foreword</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, World!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programming a Guessing Game</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Common Programming Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Variables and Mutability</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Comments</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html" class="active"><strong aria-hidden="true">3.5.</strong> Control Flow</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Understanding Ownership</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> What is Ownership?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> References and Borrowing</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> The Slice Type</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Using Structs to Structure Related Data</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Defining and Instantiating Structs</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> An Example Program Using Structs</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> Method Syntax</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Enums and Pattern Matching</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Defining an Enum</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> The match Control Flow Construct</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Concise Control Flow with if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Managing Growing Projects with Packages, Crates, and Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Packages and Crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Defining Modules to Control Scope and Privacy</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Paths for Referring to an Item in the Module Tree</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Bringing Paths Into Scope with the use Keyword</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Separating Modules into Different Files</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Common Collections</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Storing Lists of Values with Vectors</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Storing UTF-8 Encoded Text with Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Storing Keys with Associated Values in Hash Maps</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> Error Handling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Unrecoverable Errors with panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Recoverable Errors with Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> To panic! or Not to panic!</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Generic Types, Traits, and Lifetimes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Generic Data Types</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Traits: Defining Shared Behavior</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> Validating References with Lifetimes</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Writing Automated Tests</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> How to Write Tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Controlling How Tests Are Run</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> Test Organization</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> An I/O Project: Building a Command Line Program</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Accepting Command Line Arguments</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Reading a File</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Refactoring to Improve Modularity and Error Handling</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Developing the Library’s Functionality with Test Driven Development</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Working with Environment Variables</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Writing Error Messages to Standard Error Instead of Standard Output</a></li></ol></li><li class="chapter-item expanded "><a href="end-of-experiment.html"><strong aria-hidden="true">13.</strong> End of Experiment</a></li></ol>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -114,9 +146,10 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/rust-lang/book" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/cognitive-engineering-lab/rust-book" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -130,8 +163,9 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -142,10 +176,10 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
-<p>The ability to run some code depending on if a condition is true, or run some
-code repeatedly while a condition is true, are basic building blocks in most
-programming languages. The most common constructs that let you control the flow
-of execution of Rust code are <code>if</code> expressions and loops.</p>
+<p>The ability to run some code depending on whether a condition is <code>true</code> and to
+run some code repeatedly while a condition is <code>true</code> are basic building blocks
+in most programming languages. The most common constructs that let you control
+the flow of execution of Rust code are <code>if</code> expressions and loops.</p>
 <h3 id="if-expressions"><a class="header" href="#if-expressions"><code>if</code> Expressions</a></h3>
 <p>An <code>if</code> expression allows you to branch your code depending on conditions. You
 provide a condition and then state, “If this condition is met, run this block
@@ -153,33 +187,32 @@ of code. If the condition is not met, do not run this block of code.”</p>
 <p>Create a new project called <em>branches</em> in your <em>projects</em> directory to explore
 the <code>if</code> expression. In the <em>src/main.rs</em> file, input the following:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let number = 3;
 
     if number &lt; 5 {
-        println!(&quot;condition was true&quot;);
+        println!("condition was true");
     } else {
-        println!(&quot;condition was false&quot;);
+        println!("condition was false");
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>All <code>if</code> expressions start with the keyword <code>if</code>, followed by a condition. In
 this case, the condition checks whether or not the variable <code>number</code> has a
-value less than 5. We place the block of code to execute if the condition is true
-immediately after the condition inside curly brackets. Blocks of code
+value less than 5. We place the block of code to execute if the condition is
+<code>true</code> immediately after the condition inside curly brackets. Blocks of code
 associated with the conditions in <code>if</code> expressions are sometimes called <em>arms</em>,
 just like the arms in <code>match</code> expressions that we discussed in the <a href="ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number">“Comparing
 the Guess to the Secret Number”</a><!--
 ignore --> section of Chapter 2.</p>
-<p>Optionally, we can also include an <code>else</code> expression, which we chose
-to do here, to give the program an alternative block of code to execute should
-the condition evaluate to false. If you don’t provide an <code>else</code> expression and
-the condition is false, the program will just skip the <code>if</code> block and move on
+<p>Optionally, we can also include an <code>else</code> expression, which we chose to do
+here, to give the program an alternative block of code to execute should the
+condition evaluate to <code>false</code>. If you don’t provide an <code>else</code> expression and
+the condition is <code>false</code>, the program will just skip the <code>if</code> block and move on
 to the next bit of code.</p>
 <p>Try running this code; you should see the following output:</p>
 <pre><code class="language-console">$ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
      Running `target/debug/branches`
 condition was true
 </code></pre>
@@ -189,16 +222,15 @@ condition was true
 </span>    let number = 7;
 <span class="boring">
 </span><span class="boring">    if number &lt; 5 {
-</span><span class="boring">        println!(&quot;condition was true&quot;);
+</span><span class="boring">        println!("condition was true");
 </span><span class="boring">    } else {
-</span><span class="boring">        println!(&quot;condition was false&quot;);
+</span><span class="boring">        println!("condition was false");
 </span><span class="boring">    }
-</span><span class="boring">}
-</span></code></pre>
+</span><span class="boring">}</span></code></pre>
 <p>Run the program again, and look at the output:</p>
 <pre><code class="language-console">$ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
      Running `target/debug/branches`
 condition was false
 </code></pre>
@@ -210,10 +242,9 @@ following code:</p>
     let number = 3;
 
     if number {
-        println!(&quot;number was three&quot;);
+        println!("number was three");
     }
-}
-</code></pre>
+}</code></pre>
 <p>The <code>if</code> condition evaluates to a value of <code>3</code> this time, and Rust throws an
 error:</p>
 <pre><code class="language-console">$ cargo run
@@ -225,7 +256,7 @@ error[E0308]: mismatched types
   |        ^^^^^^ expected `bool`, found integer
 
 For more information about this error, try `rustc --explain E0308`.
-error: could not compile `branches` due to previous error
+error: could not compile `branches` (bin "branches") due to 1 previous error
 </code></pre>
 <p>The error indicates that Rust expected a <code>bool</code> but got an integer. Unlike
 languages such as Ruby and JavaScript, Rust will not automatically try to
@@ -234,68 +265,66 @@ convert non-Boolean types to a Boolean. You must be explicit and always provide
 only when a number is not equal to <code>0</code>, for example, we can change the <code>if</code>
 expression to the following:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let number = 3;
 
     if number != 0 {
-        println!(&quot;number was something other than zero&quot;);
+        println!("number was something other than zero");
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Running this code will print <code>number was something other than zero</code>.</p>
 <h4 id="handling-multiple-conditions-with-else-if"><a class="header" href="#handling-multiple-conditions-with-else-if">Handling Multiple Conditions with <code>else if</code></a></h4>
 <p>You can use multiple conditions by combining <code>if</code> and <code>else</code> in an <code>else if</code>
 expression. For example:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let number = 6;
 
     if number % 4 == 0 {
-        println!(&quot;number is divisible by 4&quot;);
+        println!("number is divisible by 4");
     } else if number % 3 == 0 {
-        println!(&quot;number is divisible by 3&quot;);
+        println!("number is divisible by 3");
     } else if number % 2 == 0 {
-        println!(&quot;number is divisible by 2&quot;);
+        println!("number is divisible by 2");
     } else {
-        println!(&quot;number is not divisible by 4, 3, or 2&quot;);
+        println!("number is not divisible by 4, 3, or 2");
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This program has four possible paths it can take. After running it, you should
 see the following output:</p>
 <pre><code class="language-console">$ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.31s
      Running `target/debug/branches`
 number is divisible by 3
 </code></pre>
 <p>When this program executes, it checks each <code>if</code> expression in turn and executes
-the first body for which the condition holds true. Note that even though 6 is
-divisible by 2, we don’t see the output <code>number is divisible by 2</code>, nor do we
-see the <code>number is not divisible by 4, 3, or 2</code> text from the <code>else</code> block.
-That’s because Rust only executes the block for the first true condition, and
-once it finds one, it doesn’t even check the rest.</p>
+the first body for which the condition evaluates to <code>true</code>. Note that even
+though 6 is divisible by 2, we don’t see the output <code>number is divisible by 2</code>,
+nor do we see the <code>number is not divisible by 4, 3, or 2</code> text from the <code>else</code>
+block. That’s because Rust only executes the block for the first <code>true</code>
+condition, and once it finds one, it doesn’t even check the rest.</p>
 <p>Using too many <code>else if</code> expressions can clutter your code, so if you have more
 than one, you might want to refactor your code. Chapter 6 describes a powerful
 Rust branching construct called <code>match</code> for these cases.</p>
 <h4 id="using-if-in-a-let-statement"><a class="header" href="#using-if-in-a-let-statement">Using <code>if</code> in a <code>let</code> Statement</a></h4>
 <p>Because <code>if</code> is an expression, we can use it on the right side of a <code>let</code>
 statement to assign the outcome to a variable, as in Listing 3-2.</p>
-<p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<figure class="listing" id="listing-3-2">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let condition = true;
     let number = if condition { 5 } else { 6 };
 
-    println!(&quot;The value of number is: {number}&quot;);
-}
-</code></pre></pre>
-<p><span class="caption">Listing 3-2: Assigning the result of an <code>if</code> expression
-to a variable</span></p>
+    println!("The value of number is: {number}");
+}</code></pre></pre>
+<figcaption><a href="#listing-3-2">Listing 3-2</a>: Assigning the result of an <code>if</code> expression to a variable</figcaption>
+</figure>
 <p>The <code>number</code> variable will be bound to a value based on the outcome of the <code>if</code>
 expression. Run this code to see what happens:</p>
 <pre><code class="language-console">$ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
      Running `target/debug/branches`
 The value of number is: 5
 </code></pre>
@@ -310,11 +339,10 @@ example, we’ll get an error:</p>
 <pre><code class="language-rust ignore does_not_compile">fn main() {
     let condition = true;
 
-    let number = if condition { 5 } else { &quot;six&quot; };
+    let number = if condition { 5 } else { "six" };
 
-    println!(&quot;The value of number is: {number}&quot;);
-}
-</code></pre>
+    println!("The value of number is: {number}");
+}</code></pre>
 <p>When we try to compile this code, we’ll get an error. The <code>if</code> and <code>else</code> arms
 have value types that are incompatible, and Rust indicates exactly where to
 find the problem in the program:</p>
@@ -323,13 +351,13 @@ find the problem in the program:</p>
 error[E0308]: `if` and `else` have incompatible types
  --&gt; src/main.rs:4:44
   |
-4 |     let number = if condition { 5 } else { &quot;six&quot; };
+4 |     let number = if condition { 5 } else { "six" };
   |                                 -          ^^^^^ expected integer, found `&amp;str`
   |                                 |
   |                                 expected because of this
 
 For more information about this error, try `rustc --explain E0308`.
-error: could not compile `branches` due to previous error
+error: could not compile `branches` (bin "branches") due to 1 previous error
 </code></pre>
 <p>The expression in the <code>if</code> block evaluates to an integer, and the expression in
 the <code>else</code> block evaluates to a string. This won’t work because variables must
@@ -339,12 +367,12 @@ compiler verify the type is valid everywhere we use <code>number</code>. Rust wo
 able to do that if the type of <code>number</code> was only determined at runtime; the
 compiler would be more complex and would make fewer guarantees about the code
 if it had to keep track of multiple hypothetical types for any variable.</p>
-<div class="quiz-placeholder" data-quiz-name="ch03-05-control-flow-sec1-if"  data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The first if-expression is a more concise way of representing the behavior of the second if-statement.\n&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:0},&quot;prompt&quot;:{&quot;choices&quot;:[&quot;True&quot;,&quot;False&quot;],&quot;prompt&quot;:&quot;True/false: these two pieces of code have the same effect on `x`.\n\nSnippet 1:\n```\nlet x = if cond { 1 } else { 2 };\n```\n\nSnippet 2:\n```\nlet mut x;\nif cond {\n  x = 1;\n} else {\n  x = 2;\n}\n```\n&quot;}},{&quot;context&quot;:&quot;An if-expression without an else-branch always returns the unit type, therefore `y` has the type and value of unit (or `()`).\n&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;()&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn main() {\n  let x = true;\n  let y = if x {};\n  println!(\&quot;{y:?}\&quot;);\n}\n&quot;}}]}"  data-quiz-fullscreen=""  data-quiz-cache-answers="" ></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch03-05-control-flow-sec1-if&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;The first if-expression is a more concise way of representing the behavior of the second if-statement.\n\nNote that Rust **does not** require `x` to be initially declared with `let mut` in the second snippet.\nThis is because Rust can determine that `x` is only ever assigned once, since only one branch of the \nif-statement will ever execute.\n&quot;,&quot;id&quot;:&quot;5ae11501-25d9-4b94-8e88-aa1c2122779f&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;True&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;False&quot;],&quot;prompt&quot;:&quot;True/false: executing these two pieces of code results in the same value for `x`.\n\nSnippet 1:\n```\nlet x = if cond { 1 } else { 2 };\n```\n\nSnippet 2:\n```\nlet x;\nif cond {\n  x = 1;\n} else {\n  x = 2;\n}\n```\n\n(Note: both of these snippets compile!)\n&quot;}},{&quot;context&quot;:&quot;The condition to an if-expression must be a boolean. Rust does not have a concept of \&quot;truthy\&quot; or \&quot;falsy\&quot; values.\n&quot;,&quot;id&quot;:&quot;4e07358c-b318-49cb-8210-fbed7ed50e23&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:false,&quot;lineNumber&quot;:3},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn main() {\n  let x = 1;\n  let y = if x { 0 } else { 1 }; \n  println!(\&quot;{y}\&quot;);\n}\n&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
 <h3 id="repetition-with-loops"><a class="header" href="#repetition-with-loops">Repetition with Loops</a></h3>
 <p>It’s often useful to execute a block of code more than once. For this task,
 Rust provides several <em>loops</em>, which will run through the code inside the loop
-body to the end and then start immediately back at the beginning. To
-experiment with loops, let’s make a new project called <em>loops</em>.</p>
+body to the end and then start immediately back at the beginning. To experiment
+with loops, let’s make a new project called <em>loops</em>.</p>
 <p>Rust has three kinds of loops: <code>loop</code>, <code>while</code>, and <code>for</code>. Let’s try each one.</p>
 <h4 id="repeating-code-with-loop"><a class="header" href="#repeating-code-with-loop">Repeating Code with <code>loop</code></a></h4>
 <p>The <code>loop</code> keyword tells Rust to execute a block of code over and over again
@@ -354,14 +382,13 @@ like this:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
 <pre><code class="language-rust ignore">fn main() {
     loop {
-        println!(&quot;again!&quot;);
+        println!("again!");
     }
-}
-</code></pre>
+}</code></pre>
 <p>When we run this program, we’ll see <code>again!</code> printed over and over continuously
 until we stop the program manually. Most terminals support the keyboard shortcut
-<span class="keystroke">ctrl-c</span> to interrupt a program that is stuck in
-a continual loop. Give it a try:</p>
+<kbd>ctrl</kbd>-<kbd>c</kbd> to interrupt a program that is stuck in a continual
+loop. Give it a try:</p>
 <!-- manual-regeneration
 cd listings/ch03-common-programming-concepts/no-listing-32-loop
 cargo run
@@ -369,7 +396,7 @@ CTRL-C
 -->
 <pre><code class="language-console">$ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.29s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s
      Running `target/debug/loops`
 again!
 again!
@@ -377,10 +404,9 @@ again!
 again!
 ^Cagain!
 </code></pre>
-<p>The symbol <code>^C</code> represents where you pressed <span class="keystroke">ctrl-c
-</span>. You may or may not see the word <code>again!</code> printed after the <code>^C</code>,
-depending on where the code was in the loop when it received the interrupt
-signal.</p>
+<p>The symbol <code>^C</code> represents where you pressed <kbd>ctrl</kbd>-<kbd>c</kbd>.</p>
+<p>You may or may not see the word <code>again!</code> printed after the <code>^C</code>, depending on
+where the code was in the loop when it received the interrupt signal.</p>
 <p>Fortunately, Rust also provides a way to break out of a loop using code. You
 can place the <code>break</code> keyword within the loop to tell the program when to stop
 executing the loop. Recall that we did this in the guessing game in the
@@ -397,7 +423,7 @@ the result of that operation out of the loop to the rest of your code. To do
 this, you can add the value you want returned after the <code>break</code> expression you
 use to stop the loop; that value will be returned out of the loop so you can
 use it, as shown here:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let mut counter = 0;
 
     let result = loop {
@@ -408,30 +434,37 @@ use it, as shown here:</p>
         }
     };
 
-    println!(&quot;The result is {result}&quot;);
-}
-</code></pre></pre>
+    println!("The result is {result}");
+}</code></pre></pre>
 <p>Before the loop, we declare a variable named <code>counter</code> and initialize it to
 <code>0</code>. Then we declare a variable named <code>result</code> to hold the value returned from
 the loop. On every iteration of the loop, we add <code>1</code> to the <code>counter</code> variable,
-and then check whether the counter is equal to <code>10</code>. When it is, we use the
-<code>break</code> keyword with the value <code>counter * 2</code>. After the loop, we use a
-semicolon to end the statement that assigns the value to <code>result</code>. Finally, we
-print the value in <code>result</code>, which in this case is 20.</p>
+and then check whether the <code>counter</code> is equal to <code>10</code>.
+When it is, we use the <code>break</code> keyword with the value <code>counter * 2</code>.
+After the loop, we use a semicolon to end the statement that assigns the value to <code>result</code>. Finally, we
+print the value in <code>result</code>, which in this case is <code>20</code>.</p>
+<p>You can also <code>return</code> from inside a loop. While <code>break</code> only exits the current
+loop, <code>return</code> always exits the current function.</p>
+<blockquote>
+<p><em>Note:</em> the semicolon after <code>break counter * 2</code> is technically optional. <code>break</code> is very similar to <code>return</code>,
+in that both can optionally take an expression as an argument, both cause a change in control flow.
+Code after a <code>break</code> or <code>return</code> is never executed, so the Rust compiler treats a <code>break</code> expression and
+a <code>return</code> expression as having the value unit, or <code>()</code>.</p>
+</blockquote>
 <h4 id="loop-labels-to-disambiguate-between-multiple-loops"><a class="header" href="#loop-labels-to-disambiguate-between-multiple-loops">Loop Labels to Disambiguate Between Multiple Loops</a></h4>
 <p>If you have loops within loops, <code>break</code> and <code>continue</code> apply to the innermost
-loop at that point. You can optionally specify a <em>loop label</em> on a loop that we
-can then use with <code>break</code> or <code>continue</code> to specify that those keywords apply to
-the labeled loop instead of the innermost loop. Loop labels must begin with a
-single quote. Here’s an example with two nested loops:</p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+loop at that point. You can optionally specify a <em>loop label</em> on a loop that
+you can then use with <code>break</code> or <code>continue</code> to specify that those keywords
+apply to the labeled loop instead of the innermost loop. Loop labels must begin
+with a single quote. Here’s an example with two nested loops:</p>
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let mut count = 0;
     'counting_up: loop {
-        println!(&quot;count = {count}&quot;);
+        println!("count = {count}");
         let mut remaining = 10;
 
         loop {
-            println!(&quot;remaining = {remaining}&quot;);
+            println!("remaining = {remaining}");
             if remaining == 9 {
                 break;
             }
@@ -443,15 +476,14 @@ single quote. Here’s an example with two nested loops:</p>
 
         count += 1;
     }
-    println!(&quot;End count = {count}&quot;);
-}
-</code></pre></pre>
+    println!("End count = {count}");
+}</code></pre></pre>
 <p>The outer loop has the label <code>'counting_up</code>, and it will count up from 0 to 2.
 The inner loop without a label counts down from 10 to 9. The first <code>break</code> that
 doesn’t specify a label will exit the inner loop only. The <code>break 'counting_up;</code> statement will exit the outer loop. This code prints:</p>
 <pre><code class="language-console">$ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.58s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.58s
      Running `target/debug/loops`
 count = 0
 remaining = 10
@@ -465,56 +497,56 @@ End count = 2
 </code></pre>
 <h4 id="conditional-loops-with-while"><a class="header" href="#conditional-loops-with-while">Conditional Loops with <code>while</code></a></h4>
 <p>A program will often need to evaluate a condition within a loop. While the
-condition is true, the loop runs. When the condition ceases to be true, the
+condition is <code>true</code>, the loop runs. When the condition ceases to be <code>true</code>, the
 program calls <code>break</code>, stopping the loop. It’s possible to implement behavior
 like this using a combination of <code>loop</code>, <code>if</code>, <code>else</code>, and <code>break</code>; you could
 try that now in a program, if you’d like. However, this pattern is so common
 that Rust has a built-in language construct for it, called a <code>while</code> loop. In
 Listing 3-3, we use <code>while</code> to loop the program three times, counting down each
 time, and then, after the loop, print a message and exit.</p>
-<p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<figure class="listing" id="listing-3-3">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let mut number = 3;
 
     while number != 0 {
-        println!(&quot;{number}!&quot;);
+        println!("{number}!");
 
         number -= 1;
     }
 
-    println!(&quot;LIFTOFF!!!&quot;);
-}
-</code></pre></pre>
-<p><span class="caption">Listing 3-3: Using a <code>while</code> loop to run code while a
-condition holds true</span></p>
+    println!("LIFTOFF!!!");
+}</code></pre></pre>
+<figcaption><a href="#listing-3-3">Listing 3-3</a>: Using a <code>while</code> loop to run code while a condition evaluates to <code>true</code></figcaption>
+</figure>
 <p>This construct eliminates a lot of nesting that would be necessary if you used
-<code>loop</code>, <code>if</code>, <code>else</code>, and <code>break</code>, and it’s clearer. While a condition holds
-true, the code runs; otherwise, it exits the loop.</p>
+<code>loop</code>, <code>if</code>, <code>else</code>, and <code>break</code>, and it’s clearer. While a condition
+evaluates to <code>true</code>, the code runs; otherwise, it exits the loop.</p>
 <h4 id="looping-through-a-collection-with-for"><a class="header" href="#looping-through-a-collection-with-for">Looping Through a Collection with <code>for</code></a></h4>
-<p>You can choose to use the <code>while</code> construct to loop over the elements of a
+<p>You can also use the <code>while</code> construct to loop over the elements of a
 collection, such as an array. For example, the loop in Listing 3-4 prints each
 element in the array <code>a</code>.</p>
-<p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<figure class="listing" id="listing-3-4">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let a = [10, 20, 30, 40, 50];
     let mut index = 0;
 
     while index &lt; 5 {
-        println!(&quot;the value is: {}&quot;, a[index]);
+        println!("the value is: {}", a[index]);
 
         index += 1;
     }
-}
-</code></pre></pre>
-<p><span class="caption">Listing 3-4: Looping through each element of a collection
-using a <code>while</code> loop</span></p>
+}</code></pre></pre>
+<figcaption><a href="#listing-3-4">Listing 3-4</a>: Looping through each element of a collection using a <code>while</code> loop</figcaption>
+</figure>
 <p>Here, the code counts up through the elements in the array. It starts at index
 <code>0</code>, and then loops until it reaches the final index in the array (that is,
-when <code>index &lt; 5</code> is no longer true). Running this code will print every element
-in the array:</p>
+when <code>index &lt; 5</code> is no longer <code>true</code>). Running this code will print every
+element in the array:</p>
 <pre><code class="language-console">$ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.32s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.32s
      Running `target/debug/loops`
 the value is: 10
 the value is: 20
@@ -526,28 +558,30 @@ the value is: 50
 will reach a value of <code>5</code> at some point, the loop stops executing before trying
 to fetch a sixth value from the array.</p>
 <p>However, this approach is error prone; we could cause the program to panic if
-the index value or test condition are incorrect. For example, if you changed
-the definition of the <code>a</code> array to have four elements but forgot to update the
+the index value or test condition is incorrect. For example, if you changed the
+definition of the <code>a</code> array to have four elements but forgot to update the
 condition to <code>while index &lt; 4</code>, the code would panic. It’s also slow, because
 the compiler adds runtime code to perform the conditional check of whether the
 index is within the bounds of the array on every iteration through the loop.</p>
 <p>As a more concise alternative, you can use a <code>for</code> loop and execute some code
 for each item in a collection. A <code>for</code> loop looks like the code in Listing 3-5.</p>
-<p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<figure class="listing" id="listing-3-5">
+<span class="file-name">Filename: src/main.rs</span>
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     let a = [10, 20, 30, 40, 50];
 
     for element in a {
-        println!(&quot;the value is: {element}&quot;);
+        println!("the value is: {element}");
     }
-}
-</code></pre></pre>
-<p><span class="caption">Listing 3-5: Looping through each element of a collection
-using a <code>for</code> loop</span></p>
+}</code></pre></pre>
+<figcaption><a href="#listing-3-5">Listing 3-5</a>: Looping through each element of a collection using a <code>for</code> loop</figcaption>
+</figure>
 <p>When we run this code, we’ll see the same output as in Listing 3-4. More
 importantly, we’ve now increased the safety of the code and eliminated the
 chance of bugs that might result from going beyond the end of the array or not
-going far enough and missing some items.</p>
+going far enough and missing some items. Machine code generated from <code>for</code>
+loops can be more efficient as well, because the index doesn’t need to be
+compared to the length of the array at every iteration.</p>
 <p>Using the <code>for</code> loop, you wouldn’t need to remember to change any other code if
 you changed the number of values in the array, as you would with the method
 used in Listing 3-4.</p>
@@ -561,30 +595,29 @@ number.</p>
 <p>Here’s what the countdown would look like using a <code>for</code> loop and another method
 we’ve not yet talked about, <code>rev</code>, to reverse the range:</p>
 <p><span class="filename">Filename: src/main.rs</span></p>
-<pre><pre class="playground"><code class="language-rust">fn main() {
+<pre><pre class="playground"><code class="language-rust edition2024">fn main() {
     for number in (1..4).rev() {
-        println!(&quot;{number}!&quot;);
+        println!("{number}!");
     }
-    println!(&quot;LIFTOFF!!!&quot;);
-}
-</code></pre></pre>
+    println!("LIFTOFF!!!");
+}</code></pre></pre>
 <p>This code is a bit nicer, isn’t it?</p>
-<div class="quiz-placeholder" data-quiz-name="ch03-05-control-flow-sec2-loops"  data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;It will in fact terminate after the first iteration of the loop.\n&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:0},&quot;prompt&quot;:{&quot;choices&quot;:[&quot;True&quot;,&quot;False&quot;],&quot;prompt&quot;:&quot;True/false: this code will terminate and not loop or crash.\n\n```\nfn main() {\n  let mut x = 0;\n  'a: loop {\n    x += 1;\n    'b: loop {\n      if x &gt; 10 {\n        continue 'a;\n      } else {\n        break 'b;\n      }      \n    }\n    break;       \n  }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;The array `a` has the element `5` repeated 10 times, therefore its sum is `50`.\n&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;50&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn main() {\n  let a = [5; 10];\n  let mut sum = 0;\n  for x in a {\n    sum += x;\n  }\n  println!(\&quot;{sum}\&quot;);\n}\n&quot;}}]}"  data-quiz-fullscreen=""  data-quiz-cache-answers="" ></div>
+<div class="quiz-placeholder" data-quiz-name="&quot;ch03-05-control-flow-sec2-loops&quot;" data-quiz-questions="{&quot;questions&quot;:[{&quot;context&quot;:&quot;It will in fact terminate after the first iteration of the loop.\n&quot;,&quot;id&quot;:&quot;c5b27431-c318-4243-9621-cadacb737f5a&quot;,&quot;type&quot;:&quot;MultipleChoice&quot;,&quot;answer&quot;:{&quot;answer&quot;:&quot;True&quot;},&quot;prompt&quot;:{&quot;distractors&quot;:[&quot;False&quot;],&quot;prompt&quot;:&quot;True/false: this code will terminate (that is, it will not loop forever).\n\n```\nfn main() {\n    let mut x = 0;\n    'a: loop {\n        x += 1;\n        'b: loop {\n            if x &gt; 10 {\n                continue 'a;\n            } else {\n                break 'b;\n            }      \n        }\n        break;       \n    }\n}\n```\n&quot;}},{&quot;context&quot;:&quot;The array `a` has the element `5` repeated 10 times, therefore its sum is `50`. The answer is not `15` --- note that the syntax `[5; 10]` is different from `[5, 10]`.\n&quot;,&quot;id&quot;:&quot;46a52842-d4eb-4dc9-8885-f31a2f2f59b4&quot;,&quot;type&quot;:&quot;Tracing&quot;,&quot;answer&quot;:{&quot;doesCompile&quot;:true,&quot;stdout&quot;:&quot;50&quot;},&quot;prompt&quot;:{&quot;program&quot;:&quot;fn main() {\n    let a = [5; 10];\n    let mut sum = 0;\n    for x in a {\n        sum += x;\n    }\n    println!(\&quot;{sum}\&quot;);\n}\n&quot;}}]}" data-quiz-fullscreen="true" data-quiz-cache-answers="true"></div>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>You made it! That was a sizable chapter: you learned about variables, scalar
-and compound data types, functions, comments, <code>if</code> expressions, and loops!
-To practice with the concepts discussed in this chapter, try building
-programs to do the following:</p>
+<p>You made it! This was a sizable chapter: you learned about variables, scalar
+and compound data types, functions, comments, <code>if</code> expressions, and loops! To
+practice with the concepts discussed in this chapter, try building programs to
+do the following:</p>
 <ul>
 <li>Convert temperatures between Fahrenheit and Celsius.</li>
-<li>Generate the nth Fibonacci number.</li>
+<li>Generate the <em>n</em>th Fibonacci number.</li>
 <li>Print the lyrics to the Christmas carol “The Twelve Days of Christmas,”
 taking advantage of the repetition in the song.</li>
 </ul>
 <p>When you’re ready to move on, we’ll talk about a concept in Rust that <em>doesn’t</em>
 commonly exist in other programming languages: ownership.</p>
-<script type="text/javascript" src="mdbook-quiz/embed.js"></script>
-<link rel="stylesheet" type="text/css" href="mdbook-quiz/embed.css">
+<script type="text/javascript" src="quiz/quiz-embed.iife.js"></script><link rel="stylesheet" type="text/css" href="quiz/style.css">
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -592,9 +625,11 @@ commonly exist in other programming languages: ownership.</p>
                             <a rel="prev" href="ch03-04-comments.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="ch04-00-understanding-ownership.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+
+                            <a rel="next prefetch" href="ch04-00-understanding-ownership.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
@@ -604,41 +639,37 @@ commonly exist in other programming languages: ownership.</p>
                     <a rel="prev" href="ch03-04-comments.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="ch04-00-understanding-ownership.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+
+                    <a rel="next prefetch" href="ch04-00-understanding-ownership.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://0.0.0.0:3000/__livereload");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
 
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
-        <script type="text/javascript">
+
+
+        <script>
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="ferris.js"></script>
-        <script type="text/javascript" src="js-extensions/packages/telemetry/dist/index.js"></script>
-        <script type="text/javascript" src="js-extensions/packages/consent-form/dist/index.js"></script>
-        <script type="text/javascript" src="js-extensions/packages/feedback/dist/index.js"></script>
+        <script src="ferris.js"></script>
+        <script src="js-extensions/packages/telemetry/dist/index.js"></script>
+        <script src="js-extensions/packages/consent-form/dist/index.js"></script>
+        <script src="js-extensions/packages/feedback/dist/index.js"></script>
+
+
+    </div>
     </body>
 </html>
